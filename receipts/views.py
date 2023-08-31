@@ -93,7 +93,6 @@ def create_receipt(request):
             receipt.purchaser = request.user
             receipt.save()
             return redirect("home")
-
     else:
         form = ReceiptForm()
 
