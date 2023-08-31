@@ -4,6 +4,49 @@ from receipts.models import Receipt
 from receipts.forms import ReceiptForm
 
 
+# CATEGORY LIST
+@login_required
+def category_list(request):
+    # get list of receipts that belong to current user
+    receipts = Receipt.objects.filter(purchaser=request.user)
+
+    categories = {}
+    # iterate over the receipts and count the instances of each category
+    for item in receipts:
+        categories[item.category] = categories.get(item.category, 0) + 1
+
+    context = {
+        "categories": categories,
+    }
+    return render(request, "categories/list.html", context)
+
+
+# ACCOUNT LIST
+@login_required
+def account_list(request):
+    # get list of receipts that belong to current user
+    receipts = Receipt.objects.filter(purchaser=request.user)
+
+    count = {}
+    number = {}
+    accounts = []
+
+    # Get a count of each receipt according to their account name
+    for item in receipts:
+        count[item.account] = count.get(item.account, 0) + 1
+        number[item.account] = item.account.number
+
+    # iterate over count and append an array entry
+    for key, value in count.items():
+        accounts.append([key, number[key], value])
+
+    context = {
+        "accounts": accounts,
+    }
+
+    return render(request, "accounts/list.html", context)
+
+
 # CREATE_RECEIPT
 @login_required
 def create_receipt(request):

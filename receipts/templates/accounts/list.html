@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	My Receipts
+{% endblock title %}
+
+{% block content %}
+<main>
+  <div>
+    <h1>Expense Category</h1>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Number of receipts</th>
+      </thead>
+
+      <tbody>
+        {% for account in accounts %}
+            <tr>
+              {% for item in account %}
+                <td>
+                {{ item }}
+                </td>
+              {% endfor %}
+            </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+</main>
+{% endblock content %}
