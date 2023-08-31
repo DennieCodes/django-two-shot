@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block title %}
-	My Receipts
-{% endblock title %}
-
 {% block content %}
 <main>
   <h1>My Receipts</h1>
@@ -18,7 +14,6 @@
         <th>Account</th>
       </tr>
     </thead>
-
     <tbody>
       {% for receipt in receipt_list_object %}
       <tr>
